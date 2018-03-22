@@ -70,3 +70,13 @@ void Case::addKnot(int x, int y)
 		m_queue = buffer;
 	}
 }
+
+void Case::initaliserTaille(){
+
+    Noeud* pNoeud = m_tete;
+
+    while(pNoeud != NULL){
+        m_taille++;
+        pNoeud = pNoeud->getNext();
+    }
+}

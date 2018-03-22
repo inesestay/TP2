@@ -20,6 +20,9 @@ public:
 	void readFile();
 	void affichage();
 	void allocation();
+
+	//debut code
+	void nettoyageMarque();
 };
 
 #endif // __LABYRINTH__

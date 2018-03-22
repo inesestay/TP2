@@ -98,7 +98,7 @@ void Labyrinth::readFile()
 						// Numéro de caractère impaire, 'case', detection de I ou de O
 						if(j % 2 == 1)
 						{
-							if(buffer[j] == 'I') 
+							if(buffer[j] == 'I')
 								m_in.setCoords(i/2, j/2);
 							else if(buffer[j] == 'O')
 								m_out.setCoords(i/2,j/2);
@@ -117,6 +117,16 @@ void Labyrinth::readFile()
 				}
 			}
 		}
+	}
+
+
+		///Modif code
+	for(int i = 0; i < m_hauteur; i++){
+        for(int j = 0; j < m_largeur; j++){
+            m_port[i][j].initaliserTaille();
+            m_port[i][j].setX(i);
+            m_port[i][j].setY(j);
+        }
 	}
 }
 
@@ -154,7 +164,7 @@ void Labyrinth::affichage()
 					else if(m_port[i/2][j/2].getMarqued()) std::cout << "X";
 					else std::cout << " ";
 				}
-				else // I est impair et J est paur, on est sur un mur vertical ou une porte 
+				else // I est impair et J est paur, on est sur un mur vertical ou une porte
 				{
 					if(j != 0 && j != m_largeur*2 && m_port[i/2][(j/2)-1].isLinked(i/2, j/2))// C'est une porte
 					{
@@ -178,3 +188,18 @@ void Labyrinth::allocation()
 	m_port = new Case*[m_hauteur];
 	for(int i(0); i < m_hauteur; i++) m_port[i] = new Case[m_largeur];
 }
+
+
+///Debut code eleve
+
+void Labyrinth::nettoyageMarque(){
+
+    for(int i = 0; i < m_hauteur; i++){
+        for(int j = 0; j < m_largeur; j++){
+            m_port[i][j].setMarque(false);
+        }
+    }
+
+}
+
+
