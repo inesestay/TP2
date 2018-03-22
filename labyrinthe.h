@@ -23,6 +23,8 @@ public:
 
 	//debut code
 	void nettoyageMarque();
+
+	void cheminLargeur();
 };
 
 #endif // __LABYRINTH__

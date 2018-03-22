@@ -203,3 +203,63 @@ void Labyrinth::nettoyageMarque(){
 }
 
 
+void Labyrinth::cheminLargeur(){
+
+    Case* pCaseEtude;
+
+    std::queue<Case*> queueCase;
+
+    queueCase.push(&m_port[m_in.getX()][m_in.getY()]);
+
+    while(!queueCase.empty()){
+
+        Noeud* pNoeudEtude;
+
+        pCaseEtude = queueCase.front();
+        pCaseEtude->setMarque(true);
+
+        pNoeudEtude = pCaseEtude->getTete();
+
+        while(pNoeudEtude != NULL){
+
+            if(!m_port[pNoeudEtude->getX()][pNoeudEtude->getY()].getMarqued()){
+
+                queueCase.push(&m_port[pNoeudEtude->getX()][pNoeudEtude->getY()]);
+
+                m_port[pNoeudEtude->getX()][pNoeudEtude->getY()].setXPrecedent(pCaseEtude->getX());
+                m_port[pNoeudEtude->getX()][pNoeudEtude->getY()].setYPrecedent(pCaseEtude->getY());
+            }
+
+            pNoeudEtude = pNoeudEtude->getNext();
+        }
+
+        queueCase.pop();
+
+    }
+
+    nettoyageMarque();
+
+    int x_etude = m_out.getX();
+    int y_etude = m_out.getY();
+
+    m_port[x_etude][y_etude].setMarque(true);
+
+    while(!m_port[m_in.getX()][m_in.getY()].getMarqued()){
+
+        int x_tempo = x_etude;
+
+        x_etude = m_port[x_etude][y_etude].getXPrecedent();
+        y_etude = m_port[x_tempo][y_etude].getYPrecedent();
+
+        m_port[x_etude][y_etude].setMarque(true);
+    }
+
+    std::cout << "\n\n\tAffichage Largeur : \n\n";
+
+    affichage();
+
+    nettoyageMarque();
+
+}
+
+
