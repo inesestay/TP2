@@ -9,8 +9,15 @@ int main()
 	//1 Lecture
 	tab1.readFile();
 
+
+
+	tab1.cheminLargeur();
+
+
 	//2 Affichage
 	tab1.affichage();
+
+
 
 	return 0;
 }
