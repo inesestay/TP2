@@ -98,7 +98,7 @@ void Labyrinth::readFile()
 						// Numéro de caractère impaire, 'case', detection de I ou de O
 						if(j % 2 == 1)
 						{
-							if(buffer[j] == 'I') 
+							if(buffer[j] == 'I')
 								m_in.setCoords(i/2, j/2);
 							else if(buffer[j] == 'O')
 								m_out.setCoords(i/2,j/2);
@@ -117,6 +117,16 @@ void Labyrinth::readFile()
 				}
 			}
 		}
+	}
+
+
+		///Modif code
+	for(int i = 0; i < m_hauteur; i++){
+        for(int j = 0; j < m_largeur; j++){
+            m_port[i][j].initaliserTaille();
+            m_port[i][j].setX(i);
+            m_port[i][j].setY(j);
+        }
 	}
 }
 
@@ -154,7 +164,7 @@ void Labyrinth::affichage()
 					else if(m_port[i/2][j/2].getMarqued()) std::cout << "X";
 					else std::cout << " ";
 				}
-				else // I est impair et J est paur, on est sur un mur vertical ou une porte 
+				else // I est impair et J est paur, on est sur un mur vertical ou une porte
 				{
 					if(j != 0 && j != m_largeur*2 && m_port[i/2][(j/2)-1].isLinked(i/2, j/2))// C'est une porte
 					{
@@ -178,3 +188,78 @@ void Labyrinth::allocation()
 	m_port = new Case*[m_hauteur];
 	for(int i(0); i < m_hauteur; i++) m_port[i] = new Case[m_largeur];
 }
+
+
+///Debut code eleve
+
+void Labyrinth::nettoyageMarque(){
+
+    for(int i = 0; i < m_hauteur; i++){
+        for(int j = 0; j < m_largeur; j++){
+            m_port[i][j].setMarque(false);
+        }
+    }
+
+}
+
+
+void Labyrinth::cheminLargeur(){
+
+    Case* pCaseEtude;
+
+    std::queue<Case*> queueCase;
+
+    queueCase.push(&m_port[m_in.getX()][m_in.getY()]);
+
+    while(!queueCase.empty()){
+
+        Noeud* pNoeudEtude;
+
+        pCaseEtude = queueCase.front();
+        pCaseEtude->setMarque(true);
+
+        pNoeudEtude = pCaseEtude->getTete();
+
+        while(pNoeudEtude != NULL){
+
+            if(!m_port[pNoeudEtude->getX()][pNoeudEtude->getY()].getMarqued()){
+
+                queueCase.push(&m_port[pNoeudEtude->getX()][pNoeudEtude->getY()]);
+
+                m_port[pNoeudEtude->getX()][pNoeudEtude->getY()].setXPrecedent(pCaseEtude->getX());
+                m_port[pNoeudEtude->getX()][pNoeudEtude->getY()].setYPrecedent(pCaseEtude->getY());
+            }
+
+            pNoeudEtude = pNoeudEtude->getNext();
+        }
+
+        queueCase.pop();
+
+    }
+
+    nettoyageMarque();
+
+    int x_etude = m_out.getX();
+    int y_etude = m_out.getY();
+
+    m_port[x_etude][y_etude].setMarque(true);
+
+    while(!m_port[m_in.getX()][m_in.getY()].getMarqued()){
+
+        int x_tempo = x_etude;
+
+        x_etude = m_port[x_etude][y_etude].getXPrecedent();
+        y_etude = m_port[x_tempo][y_etude].getYPrecedent();
+
+        m_port[x_etude][y_etude].setMarque(true);
+    }
+
+    std::cout << "\n\n\tAffichage Largeur : \n\n";
+
+    affichage();
+
+    nettoyageMarque();
+
+}
+
+

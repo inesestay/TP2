@@ -20,6 +20,11 @@ public:
 	void readFile();
 	void affichage();
 	void allocation();
+
+	//debut code
+	void nettoyageMarque();
+
+	void cheminLargeur();
 };
 
 #endif // __LABYRINTH__
