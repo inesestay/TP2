@@ -18,6 +18,7 @@ int main()
 	tab1.affichage();
 
 
+	tab1.affichageconnexe();
 
 	return 0;
 }

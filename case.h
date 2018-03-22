@@ -53,6 +53,9 @@ public:
 
 	int getX(){return m_X;}
 	int getY(){return m_Y;}
+
+	int getTaille(){return m_taille;}
+	void setTaille(int t){m_taille = t;}
 };
 
 #endif // __CASE__

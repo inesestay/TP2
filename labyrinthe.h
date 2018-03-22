@@ -26,7 +26,7 @@ public:
 
 	void cheminLargeur();
 	void affichageconnexe();
-    void recurcivite();
+    void recurcivite(Case *c);
 };
 
 #endif // __LABYRINTH__
