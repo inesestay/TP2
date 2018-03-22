@@ -210,7 +210,7 @@ void Labyrinth::nettoyageMarque()
 
 void Labyrinth::cheminLargeur()
 {
-
+std::cout<<"\n\nAffichage BFS:\n"<<std::endl;
     Case* pCaseEtude;
 
     std::queue<Case*> queueCase;
@@ -264,10 +264,51 @@ void Labyrinth::cheminLargeur()
         m_port[x_etude][y_etude].setMarque(true);
     }
 
-    std::cout << "\n\n\tAffichage Largeur : \n\n";
 
     affichage();
 
+    nettoyageMarque();
+
+}
+
+bool Labyrinth::recurcivite2(Case *c)
+{
+
+    c->setMarque(true);
+
+    if((c->getX()==m_out.getX()) && (c->getY()==m_out.getY()))
+    {
+        return true;
+    }
+
+    Noeud* p = c->getTete();
+    for(int i=0; i<c->getTaille(); i++)
+    {
+
+        if(!m_port[p->getX()][p->getY()].getMarqued())
+        {
+            if(recurcivite2(&m_port[p->getX()][p->getY()]))
+            {
+
+                return true;
+            }
+
+        }
+        p=p->getNext();
+    }
+
+    c->setMarque(false);
+    return false;
+
+}
+
+void Labyrinth::cheminProfondeur()
+{
+
+std::cout<<"\n\nAffichage DFS:\n"<<std::endl;
+
+    recurcivite2(&m_port[m_in.getX()][m_in.getY()]);
+    affichage();
     nettoyageMarque();
 
 }

@@ -11,14 +11,19 @@ int main()
 
 
 
-	tab1.cheminLargeur();
+
 
 
 	//2 Affichage
 	tab1.affichage();
 
+	tab1.cheminLargeur();
+
+    tab1.cheminProfondeur();
 
 	tab1.affichageconnexe();
+
+
 
 	return 0;
 }

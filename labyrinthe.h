@@ -25,6 +25,8 @@ public:
 	void nettoyageMarque();
 
 	void cheminLargeur();
+	void cheminProfondeur();
+	bool recurcivite2(Case *c);
 	void affichageconnexe();
     void recurcivite(Case *c);
 };
