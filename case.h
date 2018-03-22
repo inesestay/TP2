@@ -19,8 +19,6 @@ public:
 	//Setteurs
 	void setMarque(bool marque);
 
-	//coucou
-
 	//Getteurs
 	bool getMarqued();
 	// Teste si la case est reliée à une case de coordonnées x, y

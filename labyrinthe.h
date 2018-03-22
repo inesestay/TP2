@@ -20,6 +20,9 @@ public:
 	void readFile();
 	void affichage();
 	void allocation();
+	void affichageconnexe();
+    void recurcivite();
+
 };
 
 #endif // __LABYRINTH__
