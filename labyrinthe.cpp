@@ -5,25 +5,25 @@ Labyrinth::Labyrinth(): m_port(NULL), m_hauteur(0), m_largeur(0), m_in(0, 0), m_
 
 Labyrinth::Labyrinth(int hauteur, int largeur): m_hauteur(hauteur), m_largeur(largeur), m_in(0,0), m_out(largeur,hauteur)
 {
-	m_port = new Case*[hauteur];
-	for(int i(0); i < largeur; i++) m_port[i] = new Case[largeur];
+    m_port = new Case*[hauteur];
+    for(int i(0); i < largeur; i++) m_port[i] = new Case[largeur];
 }
 
 Labyrinth::Labyrinth(int hauteur, int largeur, int entreeI, int entreeJ, int sortieI, int sortieJ):
-			m_hauteur(hauteur), m_largeur(largeur), m_in(entreeI, entreeJ), m_out(sortieI, sortieJ)
+    m_hauteur(hauteur), m_largeur(largeur), m_in(entreeI, entreeJ), m_out(sortieI, sortieJ)
 {
-	m_port = new Case*[hauteur];
-	for(int i(0); i < largeur; i++) m_port[i] = new Case[largeur];
+    m_port = new Case*[hauteur];
+    for(int i(0); i < largeur; i++) m_port[i] = new Case[largeur];
 }
 
 Labyrinth::~Labyrinth()
 {
-	if(m_port != NULL)
-	{
-		for(int i(0); i < m_hauteur; i++) delete[] m_port[i];
+    if(m_port != NULL)
+    {
+        for(int i(0); i < m_hauteur; i++) delete[] m_port[i];
 
-		delete[] m_port;
-	}
+        delete[] m_port;
+    }
 }
 
 void Labyrinth::readFile()
@@ -127,7 +127,7 @@ void Labyrinth::readFile()
             m_port[i][j].setX(i);
             m_port[i][j].setY(j);
         }
-	}
+  }
 }
 
 void Labyrinth::affichage()
@@ -262,4 +262,23 @@ void Labyrinth::cheminLargeur(){
 
 }
 
+void Labyrinth::affichageconnexe()
+{
+    int x=0;
+    for(i=0; i<m_largeur; i++)
+    {
+        for(j=0; j<m_hauteur; i++)
+        {
+            if(!m_port[i][j].getMarqued())
+            {
 
+                x=x+1;
+                std::cout<<"Groupe N "<<x<<std::endl;
+
+                //fonction recurcive
+
+            }
+
+        }
+    }
+}
